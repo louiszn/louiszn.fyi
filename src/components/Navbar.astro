@@ -1,0 +1,32 @@
+---
+const PAGES = [
+	{
+		label: "Home",
+		href: "/",
+	},
+	{
+		label: "About",
+		href: "/about",
+	},
+	{
+		label: "Blog",
+		href: "/blog"
+	}
+];
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
+---
+
+<nav class="px-6 py-4 flex items-center justify-center">
+	<div class="flex gap-6 text-sm">
+		{PAGES.map((page) => 
+			<a
+				href={page.href}
+				class={isActive(page.href) ? 'text-fg' : 'text-muted hover:text-fg transition-colors'}
+			>
+				{page.label}
+			</a>
+		)}
+	</div>
+</nav>
