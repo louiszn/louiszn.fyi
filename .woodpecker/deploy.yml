@@ -1,0 +1,45 @@
+steps:
+  build:
+    image: docker:24-cli
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker build -t mysite:latest .
+      - docker save mysite:latest -o mysite.tar
+
+  deploy:
+    image: tailscale/tailscale:latest
+    environment:
+      TS_AUTHKEY:
+        from_secret: TS_AUTHKEY
+      TS_EXTRA_ARGS: --hostname=woodpecker-ci --advertise-tags=tag:ci
+      DEPLOY_SSH_KEY:
+        from_secret: DEPLOY_SSH_KEY
+      DEPLOY_HOST:
+        from_secret: DEPLOY_HOST
+      DEPLOY_USER:
+        from_secret: DEPLOY_USER
+    commands:
+      - /usr/local/bin/containerboot &
+      - apk add --no-cache jq openssh-client
+      - |
+        for i in $(seq 1 30); do
+          if tailscale status --json 2>/dev/null | jq -e '.BackendState == "Running"' > /dev/null; then
+            echo "Tailscale connected"
+            break
+          fi
+          echo "Waiting for Tailscale... ($i)"
+          sleep 1
+        done
+      
+      - mkdir -p ~/.ssh
+      - echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+      - chmod 600 ~/.ssh/id_ed25519
+      - ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts 2>/dev/null
+
+      - scp mysite.tar $DEPLOY_USER@$DEPLOY_HOST:/srv/mysite/mysite.tar
+      - scp docker-compose.yml $DEPLOY_USER@$DEPLOY_HOST:/srv/mysite/docker-compose.yml
+      - ssh $DEPLOY_USER@$DEPLOY_HOST "cd /srv/mysite && docker load -i mysite.tar && docker compose up -d && rm mysite.tar"
+    when:
+      branch: main
+      event: push

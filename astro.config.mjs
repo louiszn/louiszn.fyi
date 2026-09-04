@@ -10,4 +10,5 @@ export default defineConfig({
         plugins: [tailwindcss()],
     },
     integrations: [mdx(), icon()],
+    output: "static", 
 });

@@ -1,0 +1,7 @@
+services:
+  mysite:
+    image: mysite:latest
+    container_name: mysite
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3090:3090"
