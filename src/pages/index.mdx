@@ -1,0 +1,74 @@
+---
+title: "Home page"
+layout: "../layouts/MarkdownLayout.astro"
+---
+
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+import hamster from "../assets/hamster.png";
+import terry from "../assets/terry.gif";
+import nyancat from "../assets/nyancat.gif";
+import polishcow from "../assets/polish-cow.gif";
+import ralsei from "../assets/ralsei.webp";
+
+<div class="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between w-full">
+	<Image src={hamster} width={250} alt="Cul hamster" class="w-40 hidden md:block" />
+
+	<div class="w-full">
+		# Welcome to nowhere
+		
+		Hii! You've found my little corner of the internet.
+
+		This is just a little place where I can dump all random
+		things that don't really have anywhere else to go. You might
+		find some projects I've working on, things I've learned, stuffs
+		I find interesting, or just completely random nonsense that I
+		thought was worth putting on the internet.
+	</div>
+</div>
+
+## And hey! I'm Louis.
+
+I'm a student and an independent developer.
+I spend most of my time writing software in TypeScript and digging into Linux. 
+I usually end up somewhere between application code, APIs, operating systems and hardware.
+
+**Find me online at:**
+<div class="not-prose flex flex-wrap gap-3 sm:gap-4 justify-center">
+    <a href="https://github.com/louiszn" class="inline-flex h-fit items-center gap-2 px-3 py-2">
+        <Icon name="akar-icons:github-fill" class="size-5" />
+        Github
+    </a>
+
+    <a href="https://codeberg.org/louiszn" class="inline-flex h-fit items-center gap-2 px-3 py-2">
+        <Icon name="selfhst:codeberg-light" class="size-5" />
+        Codeberg
+    </a>
+
+	<a href="https://codeberg.org/louiszn" class="inline-flex h-fit items-center gap-2 px-3 py-2">
+        <Icon name="akar-icons:discord-fill" class="size-5" />
+        Discord
+    </a>
+
+	<a href="https://youtube.com/@louiszn" class="inline-flex h-fit items-center gap-2 px-3 py-2">
+        <Icon name="akar-icons:youtube-fill" class="size-5" />
+        Youtube
+    </a>
+
+	<a href="https://namemc.com/profile/Louiszn.1" class="inline-flex h-fit items-center gap-2 px-3 py-2">
+        <Icon name="simple-icons:namemc" class="size-5" />
+        NameMC
+    </a>
+</div>
+
+**Currently**
+
+- Wasting my time on weird things on the internet
+- Breaking my system with hand-written kernel patches
+- And wondering "Why did I start this project".
+
+<Image src={terry} width={200} alt="Cul terry" class="hidden sm:block sm:w-30 sm:-translate-x-30 md:w-50 absolute right-0 bottom-0 sm:-translate-y-50 md:-translate-y-5 md:-translate-x-10 xl:-translate-x-20" />
+<Image src={nyancat} width={200} alt="Bi nyan :o" class="hidden lg:block absolute right-0 top-0 translate-y-20" />
+<Image src={polishcow} width={200} alt="cowww" class="hidden absolute left-0 bottom-0 -translate-y-80 xl:block xl:w-40 2xl:w-50 xl:translate-x-10 2xl:translate-x-20" />
+<Image src={ralsei} alt="fluffy boy" class="hidden absolute left-0 bottom-0 translate-y-10 xl:block xl:w-40 xl:translate-x-2 2xl:w-50 2xl:translate-x-20" />
