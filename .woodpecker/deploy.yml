@@ -49,10 +49,10 @@ steps:
 
       - |
         ssh -i ~/.ssh/id_ed25519 "$DEPLOY_USER@$DEPLOY_HOST" '
-          mkdir -p /opt/mysite &&
-          mv /tmp/mysite.tar /opt/mysite/mysite.tar &&
-          mv /tmp/docker-compose.yml /opt/mysite/docker-compose.yml &&
-          cd /opt/mysite &&
+          mkdir -p /srv/mysite &&
+          mv /tmp/mysite.tar /srv/mysite/mysite.tar &&
+          mv /tmp/docker-compose.yml /srv/mysite/docker-compose.yml &&
+          cd /srv/mysite &&
           docker load -i mysite.tar &&
           docker compose up -d &&
           rm mysite.tar
