@@ -1,19 +1,30 @@
 ---
+import { Image } from "astro:assets";
+
+import internet from "../assets/88x31/internetprivacy.gif";
+import noai from "../assets/88x31/noai.avif";
+import voidlinux from "../assets/88x31/void.gif";
+
 const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7);
 ---
 
-<footer class="flex flex-col items-center justify-center px-6 py-4">
-	Build with ❤️ by Louiszn
+<footer class="flex flex-col items-center justify-center px-6 py-4 gap-10">
+	<div class="flex flex-col items-center justify-center">
+		Build with ❤️ by Louiszn
 
-	<div class="flex gap-2">
-		<a href="https://codeberg.org/louiszn/louiszn.fyi" class="underline"
-			>Source code</a
-		>
+		<div class="flex items-center gap-2">
+			© 2026 Louiszn
 
-		{hash && (
+			<span aria-hidden="true">·</span>
+
+			<a href="https://codeberg.org/louiszn/louiszn.fyi" class="underline">
+				Source code
+			</a>
+
+			{hash && (
 			<>
 				<span aria-hidden="true">·</span>
-				
+
 				<a
 					href={`https://codeberg.org/louiszn/louiszn.fyi/commit/${hash}`}
 					class="underline"
@@ -22,5 +33,15 @@ const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7);
 				</a>
 			</>
 		)}
+		</div>
+	</div>
+
+	<div class="flex flex-wrap gap-1 justify-center">
+		<a href="https://voidlinux.org" target="_blank">
+			<Image src={voidlinux} alt="void linux" />
+		</a>
+
+		<Image src={internet} alt="Internet privacy" />
+		<Image src={noai} alt="No AI!!!" />
 	</div>
 </footer>
