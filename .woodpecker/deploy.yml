@@ -10,6 +10,8 @@ steps:
       dockerfile: Dockerfile
       dry_run: true
       output: type=oci,dest=mysite.tar
+      build_args:
+        PUBLIC_DEPLOYMENT_HASH: ${CI_COMMIT_SHA}
 
   deploy:
     image: tailscale/tailscale:latest

@@ -1,4 +1,6 @@
 FROM oven/bun:1 AS build
+ARG PUBLIC_DEPLOYMENT_HASH
+ENV PUBLIC_DEPLOYMENT_HASH=$PUBLIC_DEPLOYMENT_HASH
 WORKDIR /build
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile

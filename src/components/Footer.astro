@@ -1,5 +1,26 @@
+---
+const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7);
+---
+
 <footer class="flex flex-col items-center justify-center px-6 py-4">
 	Build with ❤️ by Louiszn
-	
-	<a href="https://codeberg.org/louiszn/louiszn.fyi" class="underline">Source code</a>
+
+	<div class="flex gap-2">
+		<a href="https://codeberg.org/louiszn/louiszn.fyi" class="underline"
+			>Source code</a
+		>
+
+		{hash && (
+			<>
+				<span aria-hidden="true">·</span>
+				
+				<a
+					href={`https://codeberg.org/louiszn/louiszn.fyi/commit/${hash}`}
+					class="underline"
+				>
+					#{hash}
+				</a>
+			</>
+		)}
+	</div>
 </footer>
