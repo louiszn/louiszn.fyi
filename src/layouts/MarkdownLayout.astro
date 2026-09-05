@@ -11,7 +11,16 @@ const { frontmatter } = Astro.props;
 
 <Layout title={frontmatter.title}>
 	<article
-		class="w-full prose-sm md:prose lg:prose-lg dark:prose-invert max-w-screen! prose-h1:text-center prose-ul:list-disc prose-ul:pl-6 text-justify prose-blockquote:border-l-4"
+		class="
+			w-full max-w-screen!
+			prose-sm md:prose lg:prose-lg dark:prose-invert
+			text-justify
+			prose-h1:text-center prose-h1:font-mono
+			prose-h2:font-mono
+			prose-h3:font-mono
+			prose-ul:list-disc prose-ul:pl-6
+			prose-blockquote:border-l-4
+		"
 	>
 		<slot />
 	</article>
