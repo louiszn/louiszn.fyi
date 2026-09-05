@@ -8,7 +8,9 @@ import voidlinux from "../assets/88x31/void.gif";
 const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7);
 ---
 
-<footer class="flex flex-col items-center justify-center px-6 py-4 gap-10 text-lg">
+<footer
+	class="flex flex-col items-center justify-center px-6 py-4 gap-10 text-lg"
+>
 	<div class="flex flex-col items-center justify-center">
 		Build with ❤️ by Louiszn
 
@@ -46,6 +48,8 @@ const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7);
 	</div>
 
 	<div class="flex flex-wrap gap-1 justify-center">
-		<Image src="/oreocat.png" width={88} height={31} alt="Oreo cat" />
+		<a href="/88x31">
+			<Image src="/assets/me.png" width={88} height={31} alt="Oreo cat" />
+		</a>
 	</div>
 </footer>

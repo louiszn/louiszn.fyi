@@ -1,0 +1,45 @@
+---
+title: "Louiszn - 88x31"
+layout: "../layouts/MarkdownLayout.astro"
+---
+
+import { Image } from "astro:assets";
+
+# 88x31
+
+As you can see, I have a lot of 88x31 buttons in the footer. There are 2 sections for them:
+- The first is for page information and some buttons that I like.
+- The second is for friends' buttons, which link to their personal websites.
+
+## Why I use them
+
+88x31 buttons are a small piece of old web culture I really like. Before social media made
+everything look the same, personal sites used tiny buttons like these to show off the things
+you like and care about or the sites you wanted to share. No algorithms, no ads. Just people
+linking to things they liked.
+
+I keep using them because it still feels like a nice way to leave a trail of what I care
+about, and to point visitors toward people or places worth checking out.
+
+## Adding friend buttons
+
+I only add buttons from people who are my friends.
+
+If you want to add my button to your page, use the following snippet or something similar:
+
+```html
+<a href="https://louiszn.fyi" title="Cutie oreo" target="_blank">
+    <img src="https://louiszn.fyi/assets/me.png" alt="Oreo cat" width="88" height="31"/>
+</a>
+```
+
+Which will display the button like this:
+
+<a href="/" title="Cutie oreo" target="_blank">
+	<Image src="/assets/me.png" width={88} height={31} alt="Oreo cat" />
+</a>
+
+This way, I can update my button without needing you to update anything on your end!
+But feel free to save it and host it locally if you prefer.
+
+Huge thanks to Floris, my partner, who drew this for me \<3.
