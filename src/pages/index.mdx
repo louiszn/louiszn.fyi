@@ -11,6 +11,7 @@ import terry from "../assets/terry.gif";
 import nyancat from "../assets/nyancat.gif";
 import polishcow from "../assets/polish-cow.gif";
 import ralsei from "../assets/ralsei.webp";
+import linux from "../assets/linux.gif";
 
 export const PAGES = [
     {
@@ -73,7 +74,11 @@ I usually end up somewhere between application code, APIs, operating systems and
 - Breaking my system with hand-written kernel patches
 - And wondering "Why did I start this project".
 
-<Image src={terry} width={200} alt="Cul terry" class="hidden sm:block sm:w-30 sm:-translate-x-30 md:w-50 absolute right-0 bottom-0 sm:-translate-y-50 md:-translate-y-5 md:-translate-x-10 xl:-translate-x-20" />
-<Image src={nyancat} width={200} alt="Bi nyan :o" class="hidden lg:block absolute right-0 top-0 translate-y-20" />
-<Image src={polishcow} width={200} alt="cowww" class="hidden absolute left-0 bottom-0 -translate-y-80 xl:block xl:w-40 2xl:w-50 xl:translate-x-10 2xl:translate-x-20" />
-<Image src={ralsei} alt="fluffy boy" class="hidden absolute left-0 bottom-0 translate-y-10 xl:block xl:w-40 xl:translate-x-2 2xl:w-50 2xl:translate-x-20" />
+<div class="flex justify-center">
+    <Image src={linux} alt="linux" class="justify-center w-60 lg:w-80" />
+</div>
+
+<Image src={terry} width={200} alt="Cul terry" class="absolute right-0 bottom-0 hidden sm:block sm:w-30 sm:-translate-x-30 sm:-translate-y-50 md:w-50 md:-translate-x-10 md:-translate-y-5 xl:-translate-x-20" />
+<Image src={nyancat} width={200} alt="Bi nyan :o" class="absolute right-0 top-0 hidden translate-y-20 lg:block" />
+<Image src={polishcow} width={200} alt="cowww" class="absolute left-0 bottom-0 hidden -translate-y-200 xl:block xl:w-40 xl:translate-x-10 2xl:w-50 2xl:translate-x-20" />
+<Image src={ralsei} alt="fluffy boy" class="absolute left-0 bottom-0 hidden -translate-y-5 xl:block xl:w-40 xl:translate-x-2 2xl:w-50 2xl:translate-x-20" />

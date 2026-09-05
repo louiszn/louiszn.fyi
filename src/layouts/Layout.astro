@@ -25,12 +25,12 @@ const { title } = Astro.props;
 		<ClientRouter />
 	</head>
 
-	<body class="max-w-[90ch] mx-auto px-4 sm:px-6 lg:px-8 font-sans">
-		<div class="flex flex-col w-full gap-10 mb-5">
+	<body class="relative">
+		<div class="mx-auto max-w-[90ch] px-4 font-sans sm:px-6 lg:px-8">
 			<div class="min-h-[90vh]">
 				<Navbar />
 
-				<div class="w-full mt-10 md:mt-20">
+				<div class="mt-10 w-full md:mt-20">
 					<slot />
 				</div>
 			</div>
