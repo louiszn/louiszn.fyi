@@ -12,12 +12,35 @@ import nyancat from "../assets/nyancat.gif";
 import polishcow from "../assets/polish-cow.gif";
 import ralsei from "../assets/ralsei.webp";
 
+export const PAGES = [
+    {
+        label: "Github",
+        icon: "akar-icons:github-fill",
+        href: "https://github.com/louiszn"
+    },
+    {
+        label: "Codeberg",
+        icon: "selfhst:codeberg-light",
+        href: "https://codeberg.org/louiszn",
+    },
+    {
+        label: "Discord",
+        icon: "akar-icons:discord-fill",
+        href: "https://discord.gg/XXSBYg4HGc",
+    },
+    {
+        label: "Youtube",
+        icon: "akar-icons:youtube-fill",
+        href: "https://youtube.com/@louiszn",
+    },
+];
+
+# Welcome to nowhere
+		
 <div class="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between w-full">
 	<Image src={hamster} width={250} alt="Cul hamster" class="w-40 hidden md:block" />
 
 	<div class="w-full">
-		# Welcome to nowhere
-		
 		Hii! You've found my little corner of the internet.
 
 		This is just a little place where I can dump all random
@@ -36,30 +59,12 @@ I usually end up somewhere between application code, APIs, operating systems and
 
 **Find me online at:**
 <div class="not-prose flex flex-wrap gap-3 sm:gap-4 justify-center">
-    <a href="https://github.com/louiszn" class="inline-flex h-fit items-center gap-2 px-3 py-2">
-        <Icon name="akar-icons:github-fill" class="size-5" />
-        Github
-    </a>
-
-    <a href="https://codeberg.org/louiszn" class="inline-flex h-fit items-center gap-2 px-3 py-2">
-        <Icon name="selfhst:codeberg-light" class="size-5" />
-        Codeberg
-    </a>
-
-	<a href="https://codeberg.org/louiszn" class="inline-flex h-fit items-center gap-2 px-3 py-2">
-        <Icon name="akar-icons:discord-fill" class="size-5" />
-        Discord
-    </a>
-
-	<a href="https://youtube.com/@louiszn" class="inline-flex h-fit items-center gap-2 px-3 py-2">
-        <Icon name="akar-icons:youtube-fill" class="size-5" />
-        Youtube
-    </a>
-
-	<a href="https://namemc.com/profile/Louiszn.1" class="inline-flex h-fit items-center gap-2 px-3 py-2">
-        <Icon name="simple-icons:namemc" class="size-5" />
-        NameMC
-    </a>
+    {PAGES.map((page) => (
+        <a href={page.href} class="inline-flex h-fit items-center gap-2 px-3 py-2" target="_blank">
+            <Icon name={page.icon} class="size-5" />
+            {page.label}
+        </a>
+    ))}
 </div>
 
 **Currently**
