@@ -14,12 +14,9 @@ steps:
         PUBLIC_DEPLOYMENT_HASH: ${CI_COMMIT_SHA}
 
   deploy:
-    image: tailscale/tailscale:latest
+    image: alpine:latest
 
     environment:
-      TS_AUTHKEY:
-        from_secret: TS_AUTHKEY
-      TS_EXTRA_ARGS: --hostname=woodpecker-ci --advertise-tags=tag:ci
       DEPLOY_SSH_KEY:
         from_secret: DEPLOY_SSH_KEY
       DEPLOY_HOST:
@@ -28,27 +25,16 @@ steps:
         from_secret: DEPLOY_USER
 
     commands:
-      - /usr/local/bin/containerboot &
-      - apk add --no-cache jq openssh-client
-
-      - |
-        for i in $(seq 1 30); do
-          if tailscale status --json 2>/dev/null | jq -e '.BackendState == "Running"' > /dev/null; then
-            echo "Tailscale connected"
-            break
-          fi
-
-          echo "Waiting for Tailscale... ($i)"
-          sleep 1
-        done
-
+      - apk add --no-cache openssh-client
+      
       - mkdir -p ~/.ssh
       - echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
       - chmod 600 ~/.ssh/id_ed25519
       - ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+      
       - scp -i ~/.ssh/id_ed25519 mysite.tar "$DEPLOY_USER@$DEPLOY_HOST:/tmp/mysite.tar"
       - scp -i ~/.ssh/id_ed25519 docker-compose.yml "$DEPLOY_USER@$DEPLOY_HOST:/tmp/docker-compose.yml"
-
+      
       - |
         ssh -i ~/.ssh/id_ed25519 "$DEPLOY_USER@$DEPLOY_HOST" '
           mkdir -p /srv/mysite &&
