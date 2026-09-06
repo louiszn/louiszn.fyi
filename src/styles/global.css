@@ -21,7 +21,7 @@
 body {
 	color: var(--color-fg);
 	background-color: var(--color-bg);
-	background-image: url("/stars.svg");
+	background-image: url("/assets/stars.svg");
 	background-repeat: repeat;
 	background-size: 600px 600px;
 	background-attachment: fixed;
