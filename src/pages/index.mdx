@@ -62,7 +62,12 @@ I usually end up somewhere between application code, APIs, operating systems and
 
 <div class="not-prose flex flex-wrap gap-3 sm:gap-4 justify-center">
     {PAGES.map((page) => (
-        <a href={page.href} class="inline-flex h-fit items-center gap-2 px-3 py-2" target="_blank">
+        <a 
+            href={page.href} 
+            class="inline-flex h-fit items-center gap-2 px-3 py-2" 
+            target="_blank"
+            rel="noopener noreferrer"
+        >
             <Icon name={page.icon} class="size-5" />
             {page.label}
         </a>

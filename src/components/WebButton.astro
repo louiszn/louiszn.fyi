@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+
+const WIDTH = 88;
+const HEIGHT = 31;
+
+export interface Props {
+	src: string | ImageMetadata;
+	href?: string;
+	title: string;
+}
+
+const { src, href, title } = Astro.props;
+---
+
+{href ? (
+	<a href={href} target="_blank" rel="noopener noreferrer">
+		{typeof src === "string" ? (
+			<img src={src} alt={title} title={title} width={WIDTH} height={HEIGHT} />
+		) : (
+			<Image src={src} alt={title} title={title} width={WIDTH} height={HEIGHT} />
+		)}
+	</a>
+) : typeof src === "string" ? (
+	<img src={src} alt={title} title={title} width={WIDTH} height={HEIGHT} />
+) : (
+	<Image src={src} alt={title} title={title} width={WIDTH} height={HEIGHT} />
+)}

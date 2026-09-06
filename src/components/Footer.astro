@@ -1,11 +1,35 @@
 ---
-import { Image } from "astro:assets";
-
 import internet from "../assets/88x31/internetprivacy.gif";
 import noai from "../assets/88x31/noai.avif";
 import voidlinux from "../assets/88x31/void.gif";
 
+import WebButton, { type Props as WebButtonProps } from "./WebButton.astro";
+
 const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7);
+
+const FAVORITE_BUTTONS: WebButtonProps[] = [
+	{
+		src: voidlinux,
+		href: "https://voidlinux.org",
+		title: "Void Linux",
+	},
+	{
+		src: internet,
+		title: "Internet privacy!",
+	},
+	{
+		src: noai,
+		title: "No AI!!!",
+	},
+];
+
+const FRIEND_BUTTONS: WebButtonProps[] = [
+	{
+		src: "/assets/88x31/me.png",
+		href: "/88x31",
+		title: "Meowwww",
+	},
+];
 ---
 
 <footer
@@ -19,7 +43,12 @@ const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7);
 
 			<span aria-hidden="true">·</span>
 
-			<a href="https://codeberg.org/louiszn/louiszn.fyi" class="underline">
+			<a
+				href="https://codeberg.org/louiszn/louiszn.fyi"
+				class="underline"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
 				Source code
 			</a>
 
@@ -29,7 +58,9 @@ const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7);
 
 				<a
 					href={`https://codeberg.org/louiszn/louiszn.fyi/commit/${hash}`}
-					class="underline"
+					class="underline" 
+					target="_blank"
+					rel="noopener noreferrer"
 				>
 					#{hash}
 				</a>
@@ -39,17 +70,10 @@ const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7);
 	</div>
 
 	<div class="flex flex-wrap gap-1 justify-center">
-		<a href="https://voidlinux.org" target="_blank">
-			<Image src={voidlinux} alt="void linux" />
-		</a>
-
-		<Image src={internet} alt="Internet privacy" />
-		<Image src={noai} alt="No AI!!!" />
+		{FAVORITE_BUTTONS.map((item) => (<WebButton {...item} />))}
 	</div>
 
 	<div class="flex flex-wrap gap-1 justify-center">
-		<a href="/88x31">
-			<Image src="/assets/88x31/me.png" width={88} height={31} alt="Oreo cat" />
-		</a>
+		{FRIEND_BUTTONS.map((item) => (<WebButton {...item} />))}
 	</div>
 </footer>
