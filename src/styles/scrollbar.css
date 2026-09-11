@@ -1,0 +1,22 @@
+html {
+	scrollbar-width: auto;
+	scrollbar-color: var(--color-accent) transparent;
+}
+
+/* Chromium / Safari */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #555;
+	border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #777;
+}
