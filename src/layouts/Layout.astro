@@ -1,5 +1,9 @@
 ---
 import "../styles/global.css";
+
+import atkinson400 from "@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2";
+import jetbrains700 from "@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2";
+
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 
@@ -20,6 +24,22 @@ const { title } = Astro.props;
 
 		<meta name="generator" content={Astro.generator}>
 		<title>{title}</title>
+
+		<link
+			rel="preload"
+			href={atkinson400}
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+
+		<link
+			rel="preload"
+			href={jetbrains700}
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
 	</head>
 
 	<body class="relative">
