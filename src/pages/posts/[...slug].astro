@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from "astro:content";
+import MarkdownLayout from "../../layouts/MarkdownLayout.astro";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("posts");
+
+	return posts.map((post) => {
+		return {
+			params: {
+				slug: `${post.id}`,
+			},
+			props: {
+				post,
+			}
+		}
+	});
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<MarkdownLayout frontmatter={post.data}>
+	<h1 class="text-center mb-5!">{post.data.title}</h1>
+
+	<time
+		datetime={post.data.publishDate.toISOString()}
+		class="block text-center dark:text-zinc-400 mb-10"
+	>
+		{post.data.publishDate.toLocaleDateString("en-US", {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		})}
+	</time>
+
+	<Content />
+</MarkdownLayout>
