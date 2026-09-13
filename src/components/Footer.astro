@@ -5,7 +5,7 @@ import voidlinux from "../assets/88x31/void.gif";
 
 import WebButton, { type Props as WebButtonProps } from "./WebButton.astro";
 
-const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7);
+const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7) ?? "0000000";
 
 const FAVORITE_BUTTONS: WebButtonProps[] = [
 	{
@@ -38,39 +38,31 @@ const FRIEND_BUTTONS: WebButtonProps[] = [
 ---
 
 <footer
-	class="flex flex-col items-center justify-center px-6 py-4 gap-5 text-lg"
+	class="flex flex-col items-center justify-center px-6 py-4 gap-5 text-sm md:text-lg"
 >
-	<div class="flex flex-col items-center justify-center">
-		Build with ❤️ by Louiszn
+	<div class="flex flex-col items-center gap-2 text-center">
+		<div>Build with ❤️ by Louiszn</div>
 
-		<div class="flex items-center gap-2">
-			© 2026 Louiszn
-
-			<span aria-hidden="true">·</span>
+		<div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+			<span>© 2026 Louiszn</span>
 
 			<a
 				href="https://codeberg.org/louiszn/louiszn.fyi"
-				class="underline"
+				class="underline underline-offset-2"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
 				Source code
 			</a>
 
-			{hash && (
-			<>
-				<span aria-hidden="true">·</span>
-
-				<a
-					href={`https://codeberg.org/louiszn/louiszn.fyi/commit/${hash}`}
-					class="underline" 
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					#{hash}
-				</a>
-			</>
-		)}
+			<a
+				href={`https://codeberg.org/louiszn/louiszn.fyi/commit/${hash}`}
+				class="font-mono underline underline-offset-2"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				#{hash}
+			</a>
 		</div>
 	</div>
 
@@ -127,8 +119,7 @@ const FRIEND_BUTTONS: WebButtonProps[] = [
 
 			img.src = `/assets/counter/${digit}.gif`;
 			img.alt = digit;
-			img.width = 50;
-			img.height = 50;
+			img.className = "w-[40px] md:w-[55px]";
 
 			return img;
 		});

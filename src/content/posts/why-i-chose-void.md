@@ -1,5 +1,6 @@
 ---
 title: Why I chose Void Linux
+description: How Void ended my journey of distro hopping.
 publishDate: 09-12-2026
 ---
 

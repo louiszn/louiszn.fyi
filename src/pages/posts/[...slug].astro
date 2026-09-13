@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from "astro:content";
+
 import MarkdownLayout from "../../layouts/MarkdownLayout.astro";
+import { estimateReadTime, formatPublishDate } from "../../utils/post.ts";
 
 export async function getStaticPaths() {
 	const posts = await getCollection("posts");
@@ -24,16 +26,15 @@ const { Content } = await render(post);
 <MarkdownLayout frontmatter={post.data}>
 	<h1 class="text-center mb-5!">{post.data.title}</h1>
 
-	<time
-		datetime={post.data.publishDate.toISOString()}
-		class="block text-center dark:text-zinc-400 mb-10"
-	>
-		{post.data.publishDate.toLocaleDateString("en-US", {
-			year: "numeric",
-			month: "long",
-			day: "numeric",
-		})}
-	</time>
+	<div class="mb-10 flex justify-center gap-3 dark:text-zinc-400">
+		<time datetime={post.data.publishDate.toISOString()}>
+			{formatPublishDate(post.data.publishDate)}
+		</time>
+
+		<span aria-hidden="true">·</span>
+
+		<span>{estimateReadTime(post.body)} min read</span>
+	</div>
 
 	<Content />
 </MarkdownLayout>
