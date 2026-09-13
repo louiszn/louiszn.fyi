@@ -1,4 +1,6 @@
 ---
+import { cn } from "../utils/tailwind.ts";
+
 const PAGES = [
 	{
 		label: "Home",
@@ -18,15 +20,26 @@ const path = Astro.url.pathname;
 const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
 ---
 
-<nav class="px-6 py-4 flex items-center justify-center">
-	<div class="flex gap-6 text-base md:text-lg font-mono">
-		{PAGES.map((page) => 
+<nav
+	class="
+		flex
+		justify-center
+		lg:absolute lg:left-[-1px] lg:top-[-21px]
+		lg:bg-panel
+		lg:border-x lg:border-t lg:border-border
+	"
+>
+	<div class="flex font-mono text-base md:text-lg">
+		{PAGES.map((page) => (
 			<a
 				href={page.href}
-				class={isActive(page.href) ? 'text-fg' : 'text-muted hover:text-fg transition-colors'}
+				class={cn(
+					"px-3 py-1 md:px-5 md:py-2",
+					isActive(page.href) ? "text-black bg-accent" : "text-muted hover:text-fg",
+				)}
 			>
 				{page.label}
 			</a>
-		)}
+		))}
 	</div>
 </nav>
