@@ -17,13 +17,13 @@ posts.sort(
 <Layout title="Posts">
 	<div class="flex flex-col gap-5">
 		{posts.map((post) =>
-			<a href={`/posts/${post.id}`} class="flex items-center justify-between border border-border border-dashed px-6 py-4">
-				<div class="flex flex-col">
-					<span class="text-2xl font-mono">{post.data.title}</span>
+			<a href={`/posts/${post.id}`} class="flex flex-col md:flex-row md:items-center justify-between border border-border border-dashed px-6 py-4 gap-4">
+				<div class="flex flex-col gap-2 md:gap-0">
+					<span class="text-base md:text-2xl font-mono">{post.data.title}</span>
 					<span>{post.data.description}</span>
 				</div>
 
-				<div class="flex flex-col text-end">
+				<div class="flex flex-row justify-between text-sm md:text-base md:justify-normal md:flex-col md:text-end">
 					<span>{estimateReadTime(post.body)} min read</span>
 					<span>{formatPublishDate(post.data.publishDate)}</span>
 				</div>
