@@ -1,11 +1,12 @@
 ---
-import internet from "../assets/88x31/internetprivacy.gif";
-import noai from "../assets/88x31/noai.avif";
-import voidlinux from "../assets/88x31/void.gif";
+import internet from "#/assets/88x31/internetprivacy.gif";
+import noai from "#/assets/88x31/noai.avif";
+import voidlinux from "#/assets/88x31/void.gif";
 
 import WebButton, { type Props as WebButtonProps } from "./WebButton.astro";
+import Link from "./Link.astro";
 
-const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 7) ?? "0000000";
+const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 4) ?? "0000";
 
 const FAVORITE_BUTTONS: WebButtonProps[] = [
 	{
@@ -36,113 +37,30 @@ const FRIEND_BUTTONS: WebButtonProps[] = [
 		title: "Pumkin pie",
 	},
 ];
+
+const LINKS = [
+	{
+		label: "Licenses",
+		href: "/licenses",
+	},
+	{
+		label: "Source code",
+		href: "https://codeberg.org/louiszn/louiszn.fyi"
+	},
+	{
+		label: `Build #${hash}`,
+		href: `https://codeberg.org/louiszn/louiszn.fyi/commit/${hash}`,
+	}
+];
 ---
 
-<footer
-	class="flex flex-col items-center justify-center px-6 py-4 gap-5 text-sm md:text-lg"
->
-	<div class="flex flex-col items-center gap-2 text-center">
-		<div>Build with ❤️ by Louiszn</div>
+<footer class="flex flex-col items-center gap-1 px-6 py-6 text-sm md:text-base">
+	<div>© 2026 Louiszn</div>
 
-		<div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-			<span>© 2026 Louiszn</span>
-
-			<a
-				href="https://codeberg.org/louiszn/louiszn.fyi"
-				class="underline underline-offset-2"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				Source code
-			</a>
-
-			<a
-				href={`https://codeberg.org/louiszn/louiszn.fyi/commit/${hash}`}
-				class="font-mono underline underline-offset-2"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				#{hash}
-			</a>
-		</div>
+	<div class="flex flex-wrap justify-center gap-3">
+		{LINKS.map((link) =>
+			<Link href={link.href}>{link.label}</Link>
+		)}
 	</div>
-
-	<div class="flex flex-col gap-1">
-		<div class="flex flex-wrap gap-1 justify-center">
-			{FAVORITE_BUTTONS.map((item) => (<WebButton {...item} />))}
-		</div>
-
-		<div class="flex flex-wrap gap-1 justify-center">
-			{FRIEND_BUTTONS.map((item) => (<WebButton {...item} />))}
-		</div>
-	</div>
-
-	<div id="visitor-count" class="flex"></div>
 </footer>
 
-<script>
-	const VISITED_KEY = "visited";
-
-	const today = new Date().toISOString().slice(0, 10);
-	const lastVisit = localStorage.getItem(VISITED_KEY);
-
-	let count;
-
-	if (lastVisit !== today) {
-		const response = await fetch("/api/visit", {
-			method: "POST",
-		});
-
-		if (response.ok) {
-			const data = await response.json();
-
-			count = data.count;
-			localStorage.setItem(VISITED_KEY, today);
-		}
-	}
-
-	if (!count) {
-		const response = await fetch("/api/visit", {
-			method: "GET",
-		});
-
-		if (response.ok) {
-			const data = await response.json();
-			count = data.count;
-		}
-	}
-
-	const counter = document.querySelector("#visitor-count");
-
-	if (counter) {
-		const digits = String(count).split("").map((digit) => {
-			const img = document.createElement("img");
-
-			img.src = `/assets/counter/${digit}.gif`;
-			img.alt = digit;
-			img.className = "w-[40px] md:w-[55px]";
-
-			return img;
-		});
-
-		counter.replaceChildren(...digits);
-		counter.setAttribute("title", `You are the ${ordinal(count)} visitor`);
-	}
-
-	function ordinal(n: number): string {
-		const mod100 = n % 100;
-
-		if (mod100 >= 11 && mod100 <= 13) return `${n}th`;
-
-		switch (n % 10) {
-			case 1:
-				return `${n}st`;
-			case 2:
-				return `${n}nd`;
-			case 3:
-				return `${n}rd`;
-			default:
-				return `${n}th`;
-		}
-	}
-</script>

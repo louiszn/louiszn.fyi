@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import Link from "./Link.astro";
 
 const WIDTH = 88;
 const HEIGHT = 31;
@@ -14,13 +15,13 @@ const { src, href, title } = Astro.props;
 ---
 
 {href ? (
-	<a href={href} target="_blank" rel="noopener noreferrer">
+	<Link href={href}>
 		{typeof src === "string" ? (
 			<img src={src} alt={title} title={title} width={WIDTH} height={HEIGHT} />
 		) : (
 			<Image src={src} alt={title} title={title} width={WIDTH} height={HEIGHT} />
 		)}
-	</a>
+	</Link>
 ) : typeof src === "string" ? (
 	<img src={src} alt={title} title={title} width={WIDTH} height={HEIGHT} />
 ) : (

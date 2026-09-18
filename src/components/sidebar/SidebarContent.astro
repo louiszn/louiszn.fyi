@@ -1,0 +1,183 @@
+---
+import { cn } from "#/utils/tailwind";
+import Link from "../Link.astro";
+
+import { Image } from "astro:assets";
+
+import yippeee from "#/assets/emoji.gg/276933-yippeee.png";
+import ola from "#/assets/emoji.gg/994619-ola.gif";
+import graycatangel from "#/assets/emoji.gg/964368-graycatangel.png";
+import babypinkarrowright from "#/assets/emoji.gg/52988-babypinkarrowright.png";
+import peachwitch from "#/assets/emoji.gg/229860-peachwitch.gif";
+import bumblebeejellycatplushie from "#/assets/emoji.gg/596838-bumblebeejellycatplushie.png";
+import laceribbonbow from "#/assets/emoji.gg/232863-lace-ribbon-bow.png"
+import hearteyepatch from "#/assets/emoji.gg/455153-heart-eyepatch.png"
+import tigr from "#/assets/emoji.gg/984378-tigr.png";
+
+interface Item {
+	label: string;
+}
+
+interface ItemGroup extends Item {
+	items: PageItem[];
+}
+
+interface PageItem extends Item {
+	href: string;
+	icon?: ImageMetadata;
+}
+
+type ItemRoot = (ItemGroup | PageItem)[];
+
+interface Category extends Item {
+	items: ItemRoot;
+}
+
+const CATEGORIES: Category[] = [
+	{
+		label: "MENU",
+		items: [
+			{ label: "home", href: "/", icon: graycatangel },
+			{
+				label: "personal",
+				items: [
+					{ label: "about me", href: "/about/me", icon: yippeee },
+					{ label: "faq", href: "/faq/me", icon: ola }
+				]
+			},
+			{
+				label: "website",
+				items: [
+					{ label: "about the site", href: "/about/website", icon: peachwitch },
+					{ label: "credits", href: "/credits", icon: laceribbonbow },
+					{ label: "licenses", href: "/licenses", icon: hearteyepatch },
+					{ label: "faq", href: "/faq/website", icon: bumblebeejellycatplushie }
+				]
+			},
+			{ label: "posts", href: "/posts", icon: tigr }
+		]
+	}
+];
+
+interface Props {
+	groupName?: string;
+}
+
+const { groupName = "sidebar-group" } = Astro.props;
+const { pathname } = Astro.url;
+
+function isActive(href: string) {
+	return href.startsWith("http")
+		? false
+		: pathname === href || pathname.startsWith(`${href}/`);
+}
+
+const hasActiveItem = (items: PageItem[]) => items.some((i) => isActive(i.href));
+
+function getLinkClassName(href?: string, topLevel = false) {
+	return cn(
+		"flex items-center gap-2 w-full min-h-9 p-1 select-none",
+		topLevel && "border-t border-dashed border-border",
+		(href && isActive(href))
+			? "bg-accent text-black font-bold italic"
+			: "hover:text-fg hover:bg-surface"
+	);
+}
+---
+
+<div
+	class="
+		flex flex-col
+		justify-between
+		w-full min-h-full
+		px-3 py-5
+	"
+>
+	<div>
+		{CATEGORIES.map((cat) =>
+			<div class="bg-sidebar-category px-2 py-3 rounded-xl">
+				<span class="font-bold block mb-2">{cat.label}</span>
+
+				{cat.items.map((item) => {
+					if ("items" in item) {
+						return (
+							<details name={groupName} open={hasActiveItem(item.items)}>
+								<summary
+									class={getLinkClassName(undefined, true)}
+								>
+									<Image
+										id="arrow"
+										src={babypinkarrowright}
+										alt=""
+										width={28}
+										height={28}
+										layout="fixed"
+										class="block size-7 object-contain"
+									/>
+									{item.label}
+								</summary>
+
+								<ul class="pt-1 pb-3">
+									{item.items.map((i) => (
+										<li>
+											<Link href={i.href} class={getLinkClassName(i.href)}>
+												{i.icon && (
+													<Image
+														src={i.icon}
+														alt=""
+														width={28}
+														height={28}
+														layout="fixed"
+														class="block size-7 object-contain"
+													/>
+												)}
+												{i.label}
+											</Link>
+										</li>
+									))}
+								</ul>
+							</details>
+						);
+					}
+
+					return (
+						<Link href={item.href} class={getLinkClassName(item.href, true)}>
+							{item.icon && (
+								<Image
+									src={item.icon}
+									alt=""
+									width={28}
+									height={28}
+									layout="fixed"
+									class="block size-7 object-contain"
+								/>
+							)}
+							{item.label}
+						</Link>
+					);
+				})}
+			</div>
+		)}
+	</div>
+
+	<div>
+		<div id="visitor-count" class="flex justify-center"></div>
+	</div>
+</div>
+
+<style>
+	details[open] summary #arrow {
+		transform: rotate(90deg);
+	}
+
+	details[open] summary {
+		font-weight: 700;
+		font-style: italic;
+	}
+
+	details[open] summary,
+	details[open] ul {
+		background: var(--color-sidebar-group);
+	}
+</style>
+

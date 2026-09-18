@@ -1,21 +1,35 @@
 @theme {
 	--color-bg: #0d0b14;
-	--color-panel: #16131f;
+	--color-panel: #201d29;
+	--color-sidebar: #110e18;
+	--color-sidebar-category: #201d29;
+	--color-sidebar-group: #1b1924;
+	--color-surface: #241f33;
+
 	--color-fg: #c9c3d6;
 	--color-heading: #f1eef7;
 	--color-muted: #756e88;
-	--color-border: #241f33;
-	--color-accent: #a78bfa;
+
 	--color-border: #4e4271;
+	--color-accent: #a78bfa;
+
 	--font-sans: "Atkinson Hyperlegible", sans-serif;
 	--font-mono: "Jetbrains Mono", monospace;
+
+	--cursor-default: url("/assets/cursors/normal-select.png") 0 0, auto;
+	--cursor-pointer: url("/assets/cursors/link-select.png") 0 0, pointer;
 }
 
 body {
 	color: var(--color-fg);
+	cursor: var(--cursor-default);
 	background-color: var(--color-bg);
 	background-image: url("/assets/stars.svg");
 	background-repeat: repeat;
 	background-size: 600px 600px;
 	background-attachment: fixed;
+}
+
+a, button, summary {
+	cursor: var(--cursor-pointer);
 }
