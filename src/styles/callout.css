@@ -1,0 +1,73 @@
+.callout {
+	--callout-color: var(--color-accent);
+
+	overflow: hidden;
+	border: 1px solid color-mix(in oklab, var(--callout-color) 35%, var(--color-border));
+	border-left: 4px solid var(--callout-color);
+	border-radius: 0.5rem;
+	background: color-mix(in oklab, var(--callout-color) 7%, var(--color-panel));
+}
+
+.callout[data-callout="note"] {
+	--callout-color: var(--color-callout-note);
+}
+
+.callout[data-callout="tip"] {
+	--callout-color: var(--color-callout-tip);
+}
+
+.callout[data-callout="warning"] {
+	--callout-color: var(--color-callout-warning);
+}
+
+.callout[data-callout="caution"] {
+	--callout-color: var(--color-callout-caution);
+}
+
+.callout-title {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.3rem 1rem;
+	color: var(--callout-color);
+	font-weight: 700;
+	background: color-mix(in oklab, var(--callout-color) 12%, transparent);
+}
+
+.callout-title-text {
+	flex: 1;
+}
+
+.callout-title-icon,
+.callout-fold-icon {
+	display: flex;
+	flex: none;
+}
+
+.callout-title-icon svg,
+.callout-fold-icon svg {
+	width: 1.1em;
+	height: 1.1em;
+	fill: currentColor;
+}
+
+summary.callout-title {
+	list-style: none;
+	cursor: pointer;
+}
+
+summary.callout-title::-webkit-details-marker {
+	display: none;
+}
+
+.callout-fold-icon svg {
+	transition: transform 0.2s;
+}
+
+details.callout[open] .callout-fold-icon svg {
+	transform: rotate(180deg);
+}
+
+.callout-content {
+	padding: 0 1rem;
+}

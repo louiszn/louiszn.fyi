@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 @import "@fontsource/atkinson-hyperlegible/400.css";
 @import "@fontsource/atkinson-hyperlegible/700.css";
 @import "@fontsource/jetbrains-mono/500.css";
@@ -5,6 +7,6 @@
 
 @import "./theme.css";
 @import "./scrollbar.css";
+@import "./callout.css";
 
-@import "tailwindcss";
 @plugin "@tailwindcss/typography";
