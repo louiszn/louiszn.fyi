@@ -1,6 +1,5 @@
 ---
 import { cn } from "#/utils/tailwind";
-import Link from "../Link.astro";
 
 import { Image } from "astro:assets";
 
@@ -13,6 +12,7 @@ import bumblebeejellycatplushie from "#/assets/emoji.gg/596838-bumblebeejellycat
 import laceribbonbow from "#/assets/emoji.gg/232863-lace-ribbon-bow.png"
 import hearteyepatch from "#/assets/emoji.gg/455153-heart-eyepatch.png"
 import tigr from "#/assets/emoji.gg/984378-tigr.png";
+import phone from "#/assets/emoji.gg/35915-phone.png";
 
 interface Item {
 	label: string;
@@ -42,6 +42,7 @@ const CATEGORIES: Category[] = [
 				label: "personal",
 				items: [
 					{ label: "about me", href: "/about/me", icon: yippeee },
+					{ label: "contact", href: "/contact", icon: phone },
 					{ label: "faq", href: "/faq/me", icon: ola }
 				]
 			},
@@ -120,7 +121,6 @@ function getLinkClassName(href?: string, topLevel = false) {
 								<ul class="pt-1 pb-3">
 									{item.items.map((i) => (
 										<li>
-											<Link href={i.href} class={getLinkClassName(i.href)}>
 											<a href={i.href} class={getLinkClassName(i.href)}>
 												{i.icon && (
 													<Image
