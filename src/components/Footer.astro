@@ -1,42 +1,5 @@
 ---
-import internet from "#/assets/88x31/internetprivacy.gif";
-import noai from "#/assets/88x31/noai.avif";
-import voidlinux from "#/assets/88x31/void.gif";
-
-import WebButton, { type Props as WebButtonProps } from "./WebButton.astro";
-import Link from "./Link.astro";
-
 const hash = import.meta.env.PUBLIC_DEPLOYMENT_HASH?.slice(0, 4) ?? "0000";
-
-const FAVORITE_BUTTONS: WebButtonProps[] = [
-	{
-		src: voidlinux,
-		href: "https://voidlinux.org",
-		title: "Void Linux",
-	},
-	{
-		src: internet,
-		href: "/privacy",
-		title: "Internet privacy!",
-	},
-	{
-		src: noai,
-		title: "No AI!!!",
-	},
-];
-
-const FRIEND_BUTTONS: WebButtonProps[] = [
-	{
-		src: "/assets/88x31/me.png",
-		href: "/88x31",
-		title: "Meowwww",
-	},
-	{
-		src: "https://calev.pages.dev/88x31.jpg",
-		href: "https://calev.pages.dev/",
-		title: "Pumkin pie",
-	},
-];
 
 const LINKS = [
 	{
@@ -59,7 +22,7 @@ const LINKS = [
 
 	<div class="flex flex-wrap justify-center gap-3">
 		{LINKS.map((link) =>
-			<Link href={link.href}>{link.label}</Link>
+			<a href={link.href}>{link.label}</a>
 		)}
 	</div>
 </footer>

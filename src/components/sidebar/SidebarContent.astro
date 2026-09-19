@@ -121,6 +121,7 @@ function getLinkClassName(href?: string, topLevel = false) {
 									{item.items.map((i) => (
 										<li>
 											<Link href={i.href} class={getLinkClassName(i.href)}>
+											<a href={i.href} class={getLinkClassName(i.href)}>
 												{i.icon && (
 													<Image
 														src={i.icon}
@@ -132,7 +133,7 @@ function getLinkClassName(href?: string, topLevel = false) {
 													/>
 												)}
 												{i.label}
-											</Link>
+											</a>
 										</li>
 									))}
 								</ul>
@@ -141,7 +142,7 @@ function getLinkClassName(href?: string, topLevel = false) {
 					}
 
 					return (
-						<Link href={item.href} class={getLinkClassName(item.href, true)}>
+						<a href={item.href} class={getLinkClassName(item.href, true)}>
 							{item.icon && (
 								<Image
 									src={item.icon}
@@ -153,7 +154,7 @@ function getLinkClassName(href?: string, topLevel = false) {
 								/>
 							)}
 							{item.label}
-						</Link>
+						</a>
 					);
 				})}
 			</div>
