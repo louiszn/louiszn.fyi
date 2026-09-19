@@ -80,7 +80,7 @@ function getLinkClassName(href?: string, topLevel = false) {
 		topLevel && "border-t border-dashed border-border",
 		(href && isActive(href))
 			? "bg-accent text-black font-bold italic"
-			: "hover:text-fg hover:bg-surface"
+			: "hover:text-fg hover:bg-surface active:bg-accent"
 	);
 }
 ---
@@ -175,7 +175,6 @@ function getLinkClassName(href?: string, topLevel = false) {
 		font-style: italic;
 	}
 
-	details[open] summary,
 	details[open] ul {
 		background: var(--color-sidebar-group);
 	}
