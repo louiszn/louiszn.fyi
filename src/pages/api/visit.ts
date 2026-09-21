@@ -1,12 +1,16 @@
-import { redis } from "bun";
+
 import type { APIRoute } from "astro";
+
+const redis = await import("bun")
+	.then((mod) => mod.redis)
+	.catch(() => null);
 
 const COUNT_KEY = "visit:count";
 
 export const prerender = false;
 
 export const POST: APIRoute = async () => {
-	if (!process.env.REDIS_URL) {
+	if (!process.env.REDIS_URL || !redis) {
 		return new Response("Server is not available", { status: 500 });
 	}
 
@@ -15,7 +19,7 @@ export const POST: APIRoute = async () => {
 }
 
 export const GET: APIRoute = async () => {
-	if (!process.env.REDIS_URL) {
+	if (!process.env.REDIS_URL || !redis) {
 		return new Response("Server is not available", { status: 500 });
 	}
 
